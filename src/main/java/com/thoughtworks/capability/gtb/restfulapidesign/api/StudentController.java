@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @Validated
+@RequestMapping("/students")
 public class StudentController {
     @Autowired
     StudentService studentService;
@@ -20,18 +21,23 @@ public class StudentController {
 //        return loginService.login(username,password);
 //    }
 
-    @GetMapping("/students")
+    @GetMapping
     public List<Student> getAll(){
         return studentService.getAll();
     }
 
-    @GetMapping("/students/{id}")
+    @GetMapping("/{id}")
     public Student getStudent(@PathVariable Integer id){
         return studentService.getStudentById(id);
     }
 
-    @PostMapping("/students")
+    @PostMapping
     public Student addStudent(@RequestBody Student student){
         return studentService.addStudent(student);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteStudent(@PathVariable Integer id){
+        studentService.deleteStudent(id);
     }
 }
