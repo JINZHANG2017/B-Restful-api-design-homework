@@ -4,9 +4,7 @@ import com.thoughtworks.capability.gtb.restfulapidesign.dto.Student;
 import com.thoughtworks.capability.gtb.restfulapidesign.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +23,15 @@ public class StudentController {
     @GetMapping("/students")
     public List<Student> getAll(){
         return studentService.getAll();
+    }
+
+    @GetMapping("/students/{id}")
+    public Student getStudent(@PathVariable Integer id){
+        return studentService.getStudentById(id);
+    }
+
+    @PostMapping("/students")
+    public Student addStudent(@RequestBody Student student){
+        return studentService.addStudent(student);
     }
 }
