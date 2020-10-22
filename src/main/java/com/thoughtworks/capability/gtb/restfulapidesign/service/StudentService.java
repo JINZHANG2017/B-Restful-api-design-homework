@@ -10,8 +10,12 @@ import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
-    @Autowired
+    final
     StudentRepository studentRepository;
+
+    public StudentService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 
     public List<Student> getAll(){
         return studentRepository.getAllStudents();

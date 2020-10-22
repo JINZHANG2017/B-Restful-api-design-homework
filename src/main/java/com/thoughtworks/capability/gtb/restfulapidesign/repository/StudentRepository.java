@@ -14,7 +14,19 @@ public class StudentRepository {
     public StudentRepository(){
         studentList.add(new Student(1,"stu1","男","note"));
         studentList.add(new Student(2,"stu2","女","note"));
-        studentList.add(new Student(2,"stu3","女","note"));
+        studentList.add(new Student(3,"stu3","女","note"));
+        studentList.add(new Student(4,"stu4","女","note"));
+        studentList.add(new Student(5,"stu5","女","note"));
+        studentList.add(new Student(6,"stu6","女","note"));
+        studentList.add(new Student(7,"stu7","女","note"));
+        studentList.add(new Student(8,"stu8","女","note"));
+        studentList.add(new Student(9,"stu9","女","note"));
+        studentList.add(new Student(10,"stu10","女","note"));
+        studentList.add(new Student(11,"stu11","女","note"));
+        studentList.add(new Student(12,"stu12","女","note"));
+        studentList.add(new Student(13,"stu13","女","note"));
+        studentList.add(new Student(14,"stu14","女","note"));
+        studentList.add(new Student(15,"stu15","女","note"));
     }
     public List<Student> getAllStudents(){
         return studentList;

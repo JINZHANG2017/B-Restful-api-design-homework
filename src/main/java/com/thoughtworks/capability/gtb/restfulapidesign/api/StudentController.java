@@ -1,6 +1,8 @@
 package com.thoughtworks.capability.gtb.restfulapidesign.api;
 
+import com.thoughtworks.capability.gtb.restfulapidesign.dto.Group;
 import com.thoughtworks.capability.gtb.restfulapidesign.dto.Student;
+import com.thoughtworks.capability.gtb.restfulapidesign.service.GroupService;
 import com.thoughtworks.capability.gtb.restfulapidesign.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -13,13 +15,24 @@ import java.util.List;
 @Validated
 @RequestMapping("/students")
 public class StudentController {
-    @Autowired
-    StudentService studentService;
+    private final StudentService studentService;
+
+    public StudentController(StudentService studentService, GroupService groupService) {
+        this.studentService = studentService;
+        this.groupService = groupService;
+    }
+
+    private final GroupService groupService;
 
 //    @GetMapping("/login")
 //    public User login(@RequestParam @Pattern(regexp = "^[0-9a-zA-Z_]{3,10}$") String username, @RequestParam @Size(max = 12,min = 5) String password){
 //        return loginService.login(username,password);
 //    }
+
+    @GetMapping("/shuffle")
+    public List<Group> getShuffledGroups(){
+        return groupService.getShuffledGroups();
+    }
 
     @GetMapping
     public List<Student> getAll(@RequestParam(required = false) String gender){
