@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
@@ -30,5 +31,10 @@ public class StudentService {
 
     public void alterStudent(Student student){
         studentRepository.alterStudent(student);
+    }
+
+    public List<Student> getAllWithGender(String gender) {
+        List<Student> allStudents = studentRepository.getAllStudents();
+        return allStudents.stream().filter(s -> s.getGender().equals(gender)).collect(Collectors.toList());
     }
 }

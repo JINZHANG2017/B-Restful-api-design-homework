@@ -5,25 +5,28 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class StudentRepository {
     private List<Student> studentList=new ArrayList<>();
 
     public StudentRepository(){
-        studentList.add(new Student(1,"张三","男","note"));
+        studentList.add(new Student(1,"stu1","男","note"));
+        studentList.add(new Student(2,"stu2","女","note"));
+        studentList.add(new Student(2,"stu3","女","note"));
     }
     public List<Student> getAllStudents(){
         return studentList;
     }
 
     public Student getStudentById(Integer id){
-        for(Student student:studentList){
-            if(student.getId()==id){
-                return student;
-            }
+        Optional<Student> studentFound = studentList.stream().filter(student -> student.getId() == id).findFirst();
+        if(studentFound.isPresent()){
+            return studentFound.get();
+        }else{
+            return null;
         }
-        return null;
     }
 
     public Student addStudent(Student student){
@@ -33,12 +36,12 @@ public class StudentRepository {
     }
 
     public void alterStudent(Student student){
-        for(Student stu:studentList){
-            if(stu.getId()==student.getId()){
-                stu.setGender(student.getGender());
-                stu.setName(student.getName());
-                stu.setNote(student.getNote());
-            }
+        Optional<Student> studentFound = studentList.stream().filter(s -> s.getId() == student.getId()).findFirst();
+        if(studentFound.isPresent()){
+            Student stu = studentFound.get();
+            stu.setGender(student.getGender());
+            stu.setName(student.getName());
+            stu.setNote(student.getNote());
         }
     }
 

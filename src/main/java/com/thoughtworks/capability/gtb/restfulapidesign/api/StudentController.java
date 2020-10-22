@@ -22,8 +22,13 @@ public class StudentController {
 //    }
 
     @GetMapping
-    public List<Student> getAll(){
-        return studentService.getAll();
+    public List<Student> getAll(@RequestParam(required = false) String gender){
+        if(gender!=null&&(gender.equals("男")||gender.equals("女"))){
+            return studentService.getAllWithGender(gender);
+        }else{
+            return studentService.getAll();
+        }
+
     }
 
     @GetMapping("/{id}")
